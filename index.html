@@ -53,7 +53,6 @@
             --tori-white: #ffffff;
         }
         /* -GLOBAL- */
-
         html {
             scroll-behavior: smooth;}
         body {
@@ -69,11 +68,9 @@
                 var(--tori-white);
             line-height: 1.7;
         }
-
         a {
             color: var(--tori-red);
         }
-
         a:hover {
             color: var(--tori-red-dark);
         }
@@ -626,6 +623,21 @@
                 margin:
                     12px 0 0;}
         }
+        /* TORI logo */
+        .tori-logo {
+            width: 44px;
+            height: 44px;
+            object-fit: contain;
+            display: block;
+        }
+        @media (max-width: 576px) {
+            .tori-logo {
+                width: 36px;
+                height: 36px;
+            }
+        }
+
+</style>
     </style>
 </head>
 <body>
@@ -633,14 +645,13 @@
 <nav class="navbar navbar-expand-lg tori-navbar sticky-top">
     <div class="container">
         <!-- BRAND -->
-        <a
-            class="navbar-brand tori-brand"
-            href="#"
-        >
-            <div class="tori-brand-mark">
-                T
-            </div>
-            TORI <span>NETWORK</span>
+        <a class="navbar-brand d-flex align-items-center" href="index.html">
+            <img
+                src="tori-logo.png"
+                alt="TORI Network Logo"
+                class="tori-logo"
+            >
+            <span class="ml-2 font-weight-bold">TORI NETWORK</span>
         </a>
         <!-- MOBILE MENU BUTTON -->
         <button
@@ -943,7 +954,83 @@
 >
     <i class="fas fa-arrow-up"></i>
 </button>
-    
+ 
+<!-- ==FAQs== -->   
+<section id="faqs" class="py-5">
+    <div class="container">
+        <div class="text-center mb-4">
+            <h2
+                data-en="Frequently Asked Questions"
+                data-fil="Mga Madalas Itanong">
+                Frequently Asked Questions
+            </h2>
+            <p
+                class="text-muted"
+                data-en="Answers to common questions about Tori Dump."
+                data-fil="Mga sagot sa mga karaniwang tanong tungkol sa Tori Dump.">
+                Answers to common questions about Tori Dump.
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="border rounded p-3 mb-3">
+                    <h5
+                        data-en="What is Tori Dump?"
+                        data-fil="Ano ang Tori Dump?">
+                        What is Tori Dump?
+                    </h5>
+                    <p
+                        class="mb-0"
+                        data-en="Tori Dump is a system for organizing and retrieving files and information."
+                        data-fil="Ang Tori Dump ay isang sistema para sa pag-aayos at paghahanap ng mga file at impormasyon.">
+                        Tori Dump is a system for organizing and retrieving files and information.
+                    </p>
+                </div>
+                <div class="border rounded p-3 mb-3">
+                    <h5
+                        data-en="How do I name my files?"
+                        data-fil="Paano ko papangalanan ang aking mga file?">
+                        How do I name my files?
+                    </h5>
+                    <p
+                        class="mb-0"
+                        data-en="Use clear and descriptive file names so documents are easier to identify and retrieve."
+                        data-fil="Gumamit ng malinaw at deskriptibong pangalan ng file upang mas madaling matukoy at mahanap ang mga dokumento.">
+                        Use clear and descriptive file names so documents are easier to identify and retrieve.
+                    </p>
+                </div>
+                <div class="border rounded p-3 mb-3">
+                    <h5
+                        data-en="How do I search for a document?"
+                        data-fil="Paano ako maghahanap ng dokumento?">
+                        How do I search for a document?
+                    </h5>
+                    <p
+                        class="mb-0"
+                        data-en="Enter keywords related to the document's title, topic, or purpose in the search field."
+                        data-fil="Ilagay sa search field ang mga salitang may kaugnayan sa pamagat, paksa, o layunin ng dokumento.">
+                        Enter keywords related to the document's title, topic, or purpose in the search field.
+                    </p>
+                </div>
+                <div class="border rounded p-3 mb-3">
+                    <h5
+                        data-en="Can TORI answer every question?"
+                        data-fil="Nasasagot ba ng TORI ang lahat ng tanong?">
+                        Can TORI answer every question?
+                    </h5>
+                    <p
+                        class="mb-0"
+                        data-en="TORI can answer questions covered by its available knowledge base. It may not answer questions about information that has not been added."
+                        data-fil="Nasasagot ng TORI ang mga tanong na saklaw ng kasalukuyang knowledge base nito. Maaaring hindi nito masagot ang mga tanong tungkol sa impormasyong hindi pa naidaragdag.">
+                        TORI can answer questions covered by its available knowledge base. It may not answer questions about information that has not been added.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- ==FOOTER== -->
 <footer class="footer">
     <div class="container">
@@ -1091,21 +1178,41 @@
             .trim()
             .replace(/\n\n/g, "<br><br>")
             .replace(/\n/g, "<br>");    }
-    /*==LANGUAGE SWITCHER==
-     * The full English / Filipino translation
-     * system will be added after the page
-     * structure is complete.
-     */
-    const languageButtons =
-        document.querySelectorAll(".language-btn");
+    /*==LANGUAGE SWITCHER==*/
+    const languageButtons = document.querySelectorAll(".language-btn");
+    function setLanguage(language) {
+        const lang = language === "fil" ? "fil" : "en";
+        document.documentElement.lang = lang === "fil" ? "fil" : "en";
+        document.querySelectorAll("[data-en][data-fil]").forEach(function(element) {
+            if (element.children.length > 0) return;
+            const translation = element.getAttribute(
+                lang === "fil" ? "data-fil" : "data-en"
+            );
+            if (translation !== null) {
+                element.textContent = translation;
+            }
+        });
+        languageButtons.forEach(function(button) {
+            const isActive = button.getAttribute("data-language") === lang;
+            button.classList.toggle("active", isActive);
+            button.setAttribute("aria-pressed", isActive ? "true" : "false");
+        });
+        try {
+            localStorage.setItem("toriLanguage", lang);
+        } catch (error) {
+        }
+    }
     languageButtons.forEach(function(button) {
         button.addEventListener("click", function() {
-            languageButtons.forEach(function(btn) {
-                btn.classList.remove("active");
-            });
-            button.classList.add("active");
+            setLanguage(button.getAttribute("data-language"));
         });
     });
+    let savedLanguage = "en";
+    try {
+        savedLanguage = localStorage.getItem("toriLanguage") || "en";
+    } catch (error) {
+    }
+    setLanguage(savedLanguage);
 </script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
