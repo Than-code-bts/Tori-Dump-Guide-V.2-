@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ==BASIC PAGE INFORMATION== -->
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+          content="Tori Dump interactive user guide">
+    <meta name="author"
+          content="Tori Network">
+    <title>
+        Tori Dump | How to Use
+    </title>
+
+    <!-- ==BOOTSTRAP 4== -->
+    <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <!-- ==FONT AWESOME Used for simple interface icons== -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- ==GOOGLE FONT== -->
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- ==TORI STYLES== -->
+    <style>
+        /* -COLOR SYSTEM- */
+        :root {
+            --tori-red: #d9232e;
+            --tori-red-dark: #b91c26;
+            --tori-red-light: #fff1f2;
+            --tori-black: #171717;
+            --tori-dark: #262626;
+            --tori-gray-900: #333333;
+            --tori-gray-700: #555555;
+            --tori-gray-500: #737373;
+            --tori-gray-300: #d4d4d4;
+            --tori-gray-200: #e5e5e5;
+            --tori-gray-100: #f5f5f5;
+            --tori-white: #ffffff;
+        }
+        /* -GLOBAL- */
+
+        html {
+            scroll-behavior: smooth;}
+        body {
+            margin: 0;
+            font-family:
+                "Inter",
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+            color: var(--tori-gray-900);
+            background:
+                var(--tori-white);
+            line-height: 1.7;
+        }
+
+        a {
+            color: var(--tori-red);
+        }
+
+        a:hover {
+            color: var(--tori-red-dark);
+        }
+        /* -ACCESSIBILITY- */
+        :focus-visible {
+            outline:
+                3px solid
+                rgba(217, 35, 46, 0.35);
+            outline-offset: 3px;
+        }
+        /* -NAVIGATION- */
+        .tori-navbar {
+            background:
+                var(--tori-white);
+            border-bottom:
+                1px solid
+                var(--tori-gray-200);
+            padding:
+                14px 0;
+        }
+        .tori-brand {
+            display: flex;
+            align-items: center;
+            font-size: 1.15rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color:
+                var(--tori-black) !important;}
+        .tori-brand-mark {
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            border-radius: 8px;
+            background:
+                var(--tori-red);
+            color:
+                var(--tori-white);
+            font-weight: 800;
+            font-size: 0.95rem;}
+        .tori-brand span {
+            color:
+                var(--tori-red);}
+        .navbar-nav .nav-link {
+            color:
+                var(--tori-gray-700) !important;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-left: 10px;}
+        .navbar-nav .nav-link:hover {
+            color:
+                var(--tori-red) !important;}
+
+        /* --LANGUAGE SWITCHER-- */
+        .language-switcher {
+            display: flex;
+            align-items: center;
+            margin-left: 18px;}
+        .language-btn {
+            border:
+                1px solid
+                var(--tori-gray-200);
+            background:
+                var(--tori-white);
+            color:
+                var(--tori-gray-700);
+            padding:
+                5px 10px;
+            font-size:
+                0.78rem;
+            font-weight:
+                600;
+            cursor:
+                pointer;}
+        .language-btn:first-child {
+            border-radius:
+                6px 0 0 6px; }
+        .language-btn:last-child {
+            border-radius:
+                0 6px 6px 0;
+            border-left:
+                none;}
+        .language-btn.active {
+            background:
+                var(--tori-red);
+            color:
+                var(--tori-white);
+            border-color:
+                var(--tori-red);}
+       /* --HERO-- */
+        .hero {
+            position:
+                relative;
+            overflow:
+                hidden;
+            padding:
+                92px 0 82px;
+            background:
+                linear-gradient(
+                    135deg,
+                    #fff7f7 0%,
+                    #ffffff 55%,
+                    #fffafa 100%
+                );
+            border-bottom:
+                1px solid
+                var(--tori-gray-200);}
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            background:
+                rgba(217, 35, 46, 0.05);
+            top: -140px;
+            right: -80px;}
+        .hero-content {
+            position:
+                relative;
+            z-index: 2;
+            text-align:
+                center;}
+        .hero-label {
+            display:
+                inline-block;
+            margin-bottom:
+                18px;
+            padding:
+                6px 13px;
+            border-radius:
+                50px;
+            background:
+                var(--tori-red-light);
+            color:
+                var(--tori-red);
+            font-size:
+                0.78rem;
+            font-weight:
+                700;
+            letter-spacing:
+                0.04em;
+            text-transform:
+                uppercase;}
+        .hero h1 {
+            margin-bottom:
+                18px;
+            color:
+                var(--tori-black);
+            font-size:
+                clamp(2.2rem, 5vw, 3.7rem);
+            line-height:
+                1.12;
+            font-weight:
+                800;
+            letter-spacing:
+                -0.045em;}
+        .hero h1 .highlight {
+            color:
+                var(--tori-red);}
+        .hero-description {
+            max-width:
+                720px;
+            margin:
+                0 auto 34px;
+            color:
+                var(--tori-gray-500);
+            font-size:
+                1.05rem;}
+        .search-input {
+            flex:
+                1;
+            min-width:
+                0;
+            border:
+                none;
+            outline:
+                none;
+            padding:
+                13px 5px;
+            color:
+                var(--tori-gray-900);
+            background:
+                transparent;
+            font-size:
+                0.98rem;}
+        .search-input::placeholder {
+            color:
+                var(--tori-gray-500);}
+        .search-button {
+            border:
+                none;
+            border-radius:
+                8px;
+            padding:
+                0 22px;
+            background:
+                var(--tori-red);
+            color:
+                var(--tori-white);
+            font-size:
+                0.9rem;
+            font-weight:
+                700;
+            cursor:
+                pointer;
+            transition:
+                background 0.2s ease,
+                transform 0.1s ease;}
+        .search-button:hover {
+            background:
+                var(--tori-red-dark);}
+        .search-button:active {
+            transform:
+                translateY(1px);}
+
+        /* --SUGGESTED QUESTIONS-- */
+        .suggestions {
+            margin-top:
+                18px;}
+        .suggestions-label {
+            display:
+                block;
+            margin-bottom:
+                9px;
+            color:
+                var(--tori-gray-500);
+            font-size:
+                0.78rem;
+            font-weight:
+                600;}
+        .suggestion-btn {
+            display:
+                inline-block;
+            margin:
+                3px;
+            padding:
+                7px 12px;
+            border:
+                1px solid
+                var(--tori-gray-200);
+            border-radius:
+                50px;
+            background:
+                var(--tori-white);
+            color:
+                var(--tori-gray-700);
+            font-size:
+                0.78rem;
+            cursor:
+                pointer;
+            transition:
+                all 0.2s ease;}
+        .suggestion-btn:hover {
+            border-color:
+                var(--tori-red);
+            color:
+                var(--tori-red);
+            background:
+                var(--tori-red-light);}
+        /* --SECTION-- */
+        .section {
+            padding:
+                82px 0;}
+        .section-light {
+            background:
+                var(--tori-gray-100);}
+        .section-label {
+            margin-bottom:
+                8px;
+            color:
+                var(--tori-red);
+            font-size:
+                0.76rem;
+            font-weight:
+                800;
+            letter-spacing:
+                0.08em;
+            text-transform:
+                uppercase;}
+        .section-title {
+            margin-bottom:
+                12px;
+            color:
+                var(--tori-black);
+            font-size:
+                2rem;
+            font-weight:
+                800;
+            letter-spacing:
+                -0.025em;}
+        .section-description {
+            max-width:
+                700px;
+            color:
+                var(--tori-gray-500);}
+
+        /* --QUICK START-- */
+        .quick-start-card {
+            height:
+                100%;
+            padding:
+                28px;
+            background:
+                var(--tori-white);
+            border:
+                1px solid
+                var(--tori-gray-200);
+            border-radius:
+                12px;
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;}
+        .quick-start-card:hover {
+            transform:
+                translateY(-3px);
+            box-shadow:
+                0 10px 28px
+                rgba(0, 0, 0, 0.06);}
+        .step-number {
+            display:
+                inline-flex;
+            align-items:
+                center;
+            justify-content:
+                center;
+            width:
+                40px;
+            height:
+                40px;
+            margin-bottom:
+                18px;
+            border-radius:
+                50%;
+            background:
+                var(--tori-red-light);
+            color:
+                var(--tori-red);
+            font-size:
+                0.82rem;
+            font-weight:
+                800;}
+        .quick-start-card h4 {
+            margin-bottom:
+                8px;
+            color:
+                var(--tori-black);
+            font-size:
+                1.05rem;
+            font-weight:
+                700;}
+        .quick-start-card p {
+            margin:
+                0;
+            color:
+                var(--tori-gray-500);
+            font-size:
+                0.88rem;}
+        /* --WORKFLOW CONNECTOR-- */
+        .workflow {
+            position:
+                relative;}
+        .workflow::before {
+            content: "";
+            position:
+                absolute;
+            top:
+                48px;
+            left:
+                12%;
+            right:
+                12%;
+            height:
+                1px;
+            background:
+                var(--tori-gray-200);
+            z-index:
+                0;}
+        .workflow .col-md-3 {
+            position:
+                relative;
+            z-index:
+                1;}
+
+        /* --GUIDE PLACEHOLDER-- */
+        .guide-preview {
+            padding:
+                30px;
+            background:
+                var(--tori-white);
+            border:
+                1px solid
+                var(--tori-gray-200);
+            border-radius:
+                12px;}
+        .guide-item {
+            padding:
+                18px 20px;
+            border-bottom:
+                1px solid
+                var(--tori-gray-200);
+            color:
+                var(--tori-gray-900);
+            font-weight:
+                600;}
+        .guide-item:last-child {
+            border-bottom:
+                none;}
+        .guide-item i {
+            width:
+                24px;
+            color:
+                var(--tori-red);}
+
+        /* --FOOTER-- */
+        .footer {
+            padding:
+                42px 0;
+            background:
+                var(--tori-black);
+            color:
+                #bdbdbd;}
+        .footer-brand {
+            color:
+                var(--tori-white);
+            font-weight:
+                800;}
+        .footer-brand span {
+            color:
+                var(--tori-red);}
+
+        /* --MOBILE-- */
+        @media (max-width: 767px) {
+            .hero {
+                padding:
+                    65px 0 60px;}
+            .search-wrapper {
+                flex-direction:
+                    column;
+                padding:
+                    8px;}
+            .search-icon {
+                display:
+                    none;}
+            .search-input {
+                padding:
+                    12px;}
+            .search-button {
+                min-height:
+                    46px;}
+            .workflow::before {
+                display:
+                    none;}
+            .section {
+                padding:
+                    60px 0;}
+            .language-switcher {
+                margin:
+                    12px 0 0;}
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==NAVIGATION== -->
+<nav class="navbar navbar-expand-lg tori-navbar sticky-top">
+    <div class="container">
+        <a class="navbar-brand tori-brand" href="#home">
+            <div class="tori-brand-mark">T</div>
+            Tori <span>Dump</span>
+        </a>
+        <button class="navbar-toggler" type="button"
+                data-toggle="collapse" data-target="#toriNavbar"
+                aria-controls="toriNavbar" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="toriNavbar">
+            <ul class="navbar-nav ml-auto align-items-lg-center">
+                <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#steps">How It Works</a></li>
+                <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                <li class="nav-item"><a class="nav-link" href="#guide">Full Guide</a></li>
+                <li class="nav-item"><a class="nav-link" href="#ask-tori">Ask TORI</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- ==HERO / HOME== -->
+<section class="hero" id="home">
+    <div class="container">
+        <div class="hero-content">
+            <span class="hero-label">Tori Network • User Guide</span>
+            <h1>
+                How can we help you
+                <span class="highlight">use Tori Dump?</span>
+            </h1>
+            <p class="hero-description">
+                Learn how Tori Dump organizes files, improves retrieval,
+                and helps make information easier to find and manage.
+            </p>
+            <div class="ask-tori" id="ask-tori">
+                <div class="search-wrapper">
+                    <div class="search-icon">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                    </div>
+                    <input
+                        type="text"
+                        id="searchInput"
+                        class="search-input"
+                        placeholder="Ask TORI a question..."
+                        aria-label="Ask TORI a question"
+                        autocomplete="off"
+                        onkeydown="if(event.key === 'Enter') sendMessage()">
+
+                    <button
+                        class="search-button"
+                        type="button"
+                        onclick="sendMessage()">
+                        Ask TORI
+                    </button>
+                </div>
+                <div class="suggestions">
+                    <span class="suggestions-label">Try asking:</span>
+                    <button class="suggestion-btn" onclick="askSuggestion('What is Tori Dump?')">What is Tori Dump?</button>
+                    <button class="suggestion-btn" onclick="askSuggestion('How does file routing work?')">How does file routing work?</button>
+                    <button class="suggestion-btn" onclick="askSuggestion('What metadata can be extracted?')">What metadata can be extracted?</button>
+                    <button class="suggestion-btn" onclick="askSuggestion('How does Tori support DRRM?')">How does Tori support DRRM?</button>
+                </div>
+                <div class="answer-area" id="answerArea" aria-live="polite">
+                    <div class="answer-card">
+                        <h3 id="answerHeading">TORI's Answer</h3>
+                        <div class="answer-text" id="answerText"></div>
+                        <div class="answer-sources" id="answerSources"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==GET STARTED== -->
+<section class="section" id="steps">
+    <div class="container">
+        <div class="text-center">
+            <span class="section-label">Getting Started</span>
+        </div>
+        <h2 class="section-title text-center">Get started in four steps</h2>
+        <p class="section-description text-center">
+            A simple overview of how Tori Dump helps you organize, manage,
+            and retrieve your files.
+        </p>
+        <div class="row">
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="step-card">
+                    <div class="step-number">01</div>
+                    <h3>Setup</h3>
+                    <p>AI context supports automated file routing.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="step-card">
+                    <div class="step-number">02</div>
+                    <h3>Tori Dump</h3>
+                    <p>Two-click access reduces folder-tree hassles.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="step-card">
+                    <div class="step-number">03</div>
+                    <h3>Action</h3>
+                    <p>Batch drag-and-drop triggers active ingestion.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="step-card">
+                    <div class="step-number">04</div>
+                    <h3>Search</h3>
+                    <p>AI-powered query parsing improves contextual search.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- == FEATURES SECTION == -->
+<section class="section" id="features">
+    <div class="container">
+        <div class="section-heading">
+            <span class="section-label">WHAT TORI CAN DO</span>
+            <h2 class="section-title">A smarter way to work with your files</h2>
+            <p class="section-description">
+                TORI helps users locate information, understand documents,
+                and navigate the Tori workspace more efficiently.
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Find Information</h3>
+                    <p>
+                        Search the TORI knowledge base for guidance on
+                        Tori tools, files, metadata, and workflows.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-folder-open"></i>
+                    </div>
+                    <h3>Understand File Workflows</h3>
+                    <p>
+                        Learn about file retrieval, folder matching,
+                        automated routing, and document organization.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <h3>Support Government Work</h3>
+                    <p>
+                        Explore knowledge related to government operations,
+                        accountability, transparency, and disaster risk
+                        reduction and management.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- == GUIDE SECTION == -->
+<section class="section guide-section" id="guide">
+    <div class="container">
+        <div class="section-heading">
+            <span class="section-label">USER GUIDE</span>
+            <h2 class="section-title">Need help using Tori?</h2>
+            <p class="section-description">
+                Follow the step-by-step guide for additional instructions
+                on navigating the Tori workspace.
+            </p>
+        </div>
+        <div class="guide-panel">
+            <div class="guide-panel-content">
+                <div class="guide-panel-icon">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <div>
+                    <h3>Explore the Tori Dump Guide</h3>
+                    <p>
+                        Review practical instructions, recommended
+                        workflows, and tips for working with Tori.
+                    </p>
+                    <a href="how-to.html" class="btn btn-primary">
+                        Open User Guide
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- == ASK TORI SECTION == -->
+<section class="section ask-section" id="ask-tori">
+    <div class="container">
+        <div class="section-heading">
+            <span class="section-label">TORI KNOWLEDGE ASSISTANT</span>
+            <h2 class="section-title">What would you like to know?</h2>
+            <p class="section-description">
+                Ask a question about TORI, its features, or the topics
+                covered by its current knowledge base.
+            </p>
+        </div>
+        <div class="tori-chat-panel">
+            <div class="chat-header">
+                <div class="chat-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div>
+                    <h3>Ask TORI</h3>
+                    <p>Knowledge assistant</p>
+                </div>
+            </div>
+            <div class="chat-body">
+                <label for="searchInput" class="sr-only">
+                    Enter your question
+                </label>
+                <div class="search-wrapper">
+                    <i class="fas fa-comment-dots search-icon"></i>
+                    <input
+                        type="text"
+                        id="searchInput"
+                        class="search-input"
+                        placeholder="e.g., How do I retrieve a file?"
+                        autocomplete="off"
+                    >
+                    <button
+                        type="button"
+                        class="btn btn-primary ask-button"
+                        onclick="sendMessage()"
+                    >
+                        Ask <i class="fas fa-paper-plane ml-1"></i>
+                    </button>
+                </div>
+                <div class="suggestion-list">
+                    <span class="suggestion-label">TRY ASKING:</span>
+                    <button type="button" class="suggestion-chip"
+                        onclick="askSuggestion('How does file retrieval work?')">
+                        File retrieval
+                    </button>
+                    <button type="button" class="suggestion-chip"
+                        onclick="askSuggestion('What is automated routing?')">
+                        Automated routing
+                    </button>
+                    <button type="button" class="suggestion-chip"
+                        onclick="askSuggestion('What is Tori Dump?')">
+                        Tori Dump
+                    </button>
+                </div>
+                <div id="answerArea" class="answer-area" hidden>
+                    <div class="answer-heading" id="answerHeading">
+                        <i class="fas fa-robot"></i>
+                        <span>TORI's response</span>
+                    </div>
+                    <div id="answerText" class="answer-text"
+                        aria-live="polite"></div>
+                    <div id="answerSources" class="answer-sources"
+                        hidden></div>
+                </div>
+                <p class="chat-disclaimer">
+                    Responses are based on TORI's locally maintained
+                    knowledge base. If a topic is not covered, TORI may
+                    be unable to provide an answer.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- == FOOTER == -->
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-content">
+            <div>
+                <h3>TORI Dump Guide</h3>
+                <p>
+                    A practical guide to navigating the Tori workspace
+                    and its knowledge resources.
+                </p>
+            </div>
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#features">Features</a>
+                <a href="#guide">User Guide</a>
+                <a href="how-to.html">How-To Instructions</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 TORI Dump Guide. For informational purposes.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- == JAVASCRIPT DEPENDENCIES == -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Load the existing knowledge base BEFORE the search functions -->
+<script src="knowledge.js"></script>
+
+<!-- == TORI INTERACTION == -->
+<script>
+    function sendMessage() {
+        const input = document.getElementById("searchInput");
+        const question = input.value.trim();
+        if (!question) {
+            input.focus();
+            return;
+        }
+        displayToriAnswer(question);
+    }
+    function askSuggestion(question) {
+        document.getElementById("searchInput").value = question;
+        displayToriAnswer(question);
+    }
+    function displayToriAnswer(question) {
+        const answerArea = document.getElementById("answerArea");
+        const answerText = document.getElementById("answerText");
+        const answerSources = document.getElementById("answerSources");
+        const answerHeading = document.getElementById("answerHeading");
+        answerArea.hidden = false;
+        answerSources.hidden = true;
+        answerSources.textContent = "";
+        answerText.textContent = "Searching TORI's knowledge base...";
+        answerArea.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest"
+        });
+        try {
+            if (typeof generateToriAnswer !== "function") {
+                answerText.textContent =
+                    "The TORI knowledge engine could not be loaded. " +
+                    "Please check that knowledge.js exists in the same " +
+                    "repository as index.html.";
+                return;
+            }
+            const result = generateToriAnswer(question);
+            if (!result || typeof result !== "object") {
+                answerText.textContent =
+                    "TORI could not process this question. Please try " +
+                    "rephrasing it.";
+                return;
+            }
+            answerHeading.textContent = result.found
+                ? "TORI's response"
+                : "No matching information found";
+            answerText.textContent = result.answer ||
+                "No answer was returned. Please try another question.";
+            if (Array.isArray(result.sources) && result.sources.length) {
+                answerSources.hidden = false;
+                const sourceTitle = document.createElement("strong");
+                sourceTitle.textContent = "Related knowledge topics:";
+                answerSources.appendChild(sourceTitle);
+                const sourceList = document.createElement("ul");
+                result.sources.forEach(function(source) {
+                    const item = document.createElement("li");
+                    if (typeof source === "string") {
+                        item.textContent = source;
+                    } else if (source && typeof source === "object") {
+                        item.textContent =
+                            source.title || source.name || source.id ||
+                            JSON.stringify(source);
+                    } else {
+                        item.textContent = String(source);
+                    }
+                    sourceList.appendChild(item);
+                });
+                answerSources.appendChild(sourceList);
+            }
+        } catch (error) {
+            console.error("TORI response error:", error);
+            answerText.textContent =
+                "Something went wrong while processing your question. " +
+                "Please check the browser console and the knowledge.js file.";
+        }
+    }
+    document.addEventListener("DOMContentLoaded", function() {
+        const input = document.getElementById("searchInput");
+        if (input) {
+            input.addEventListener("keydown", function(event) {
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    sendMessage();
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>
