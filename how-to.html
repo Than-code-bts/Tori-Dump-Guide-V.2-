@@ -876,42 +876,36 @@
             line-height:
                 1.7;
         }
-        /* =BACK TO TOP BUTTON= */
+        /* =BACK TO THE TOPSSSS= */
         .back-to-top {
             position: fixed;
-            right: 24px;
             bottom: 24px;
-            z-index: 1050;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 48px;
-            height: 48px;
+            right: 24px;
+            z-index: 9999;
+            display: none;
+            background-color: #c62828;
+            color: #ffffff;
             border: none;
             border-radius: 50%;
-            background: var(--tori-red);
-            color: var(--tori-white);
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+            width: 48px;
+            height: 48px;
+            font-size: 24px;
             cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: opacity 0.2s ease, visibility 0.2s ease,
-                        transform 0.2s ease, background 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
-        .back-to-top:hover {
-            background: var(--tori-red-dark);
-        }
+        
         .back-to-top.is-visible {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
+            display: block;
         }
-        .back-to-top:focus-visible {
-            outline: 3px solid rgba(217, 35, 46, 0.35);
-            outline-offset: 4px;
+        
+        .back-to-top:hover {
+            background-color: #a61b1b;
         }
-
+        
+        .back-to-top:focus {
+            outline: 2px solid #ffffff;
+            outline-offset: 3px;
+        }
         /* =FOOTER= */
         .footer {
             padding:
@@ -976,12 +970,6 @@
                 font-size:
                     2.35rem;
             }
-            .back-to-top {
-                right: 16px;
-                bottom: 16px;
-                width: 44px;
-                height: 44px;
-            }
         }
     </style>
 </head>
@@ -1038,12 +1026,10 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a
-                        class="nav-link"
-                        href="#faqs"
-                        data-en="FAQs"
-                        data-fil="Mga FAQ"
-                    >
+                   <a class="nav-link"
+                       href="#faqs"
+                       data-en="FAQs"
+                       data-fil="Mga FAQ">
                         FAQs
                     </a>
                 </li>
@@ -2472,10 +2458,8 @@
     class="back-to-top"
     aria-label="Back to top"
     title="Back to top"
-    data-en-label="Back to top"
-    data-fil-label="Bumalik sa itaas"
 >
-    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    <i class="fas fa-arrow-up"></i>
 </button>
 <!-- =FOOTER= -->
 <footer class="footer">
@@ -2558,20 +2542,6 @@
         if (activeButton) {
             activeButton.classList.add("active");
         }
-        /* -Back-to-top accessible label- */
-        const backToTopButton =
-            document.getElementById("backToTop");
-        if (backToTopButton) {
-            const label =
-                language === "fil"
-                    ? backToTopButton.getAttribute("data-fil-label")
-                    : backToTopButton.getAttribute("data-en-label");
-            if (label) {
-                backToTopButton.setAttribute("aria-label", label);
-                backToTopButton.setAttribute("title", label);
-            }
-        }
-
         /* -Search placeholder- */
         const searchInput =
             document.getElementById(
@@ -2618,25 +2588,6 @@
                 }
             );
         });
-    /* =BACK TO TOP BUTTON= */
-    const backToTopButton = document.getElementById("backToTop");
-
-    function updateBackToTopVisibility() {
-        if (!backToTopButton) return;
-        backToTopButton.classList.toggle("is-visible", window.scrollY > 300);
-    }
-
-    if (backToTopButton) {
-        window.addEventListener("scroll", updateBackToTopVisibility, { passive: true });
-        backToTopButton.addEventListener("click", function() {
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
-        });
-        updateBackToTopVisibility();
-    }
-
     /* =SUGGESTION BUTTONS= */
     const searchInput =
         document.getElementById(
@@ -2790,6 +2741,23 @@
             setLanguage(
                 savedLanguage
             );
+        }
+        /* =BACKTOTOP= */
+        const backToTop = document.getElementById("backToTop");
+        if (backToTop) {
+            window.addEventListener("scroll", function () {
+                if (window.scrollY > 300) {
+                    backToTop.classList.add("is-visible");
+                } else {
+                    backToTop.classList.remove("is-visible");
+                }
+            });
+            backToTop.addEventListener("click", function () {
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+            });
         }
     );
 </script>
