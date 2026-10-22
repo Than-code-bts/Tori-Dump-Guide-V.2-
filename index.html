@@ -165,7 +165,8 @@
                 var(--tori-white);
             border-color:
                 var(--tori-red);}
-       /* --HERO-- */
+
+        /* --HERO-- */
         .hero {
             position:
                 relative;
@@ -245,6 +246,50 @@
                 var(--tori-gray-500);
             font-size:
                 1.05rem;}
+
+        /* --ASK TORI SEARCH BOX-- */
+
+        .ask-tori {
+            max-width:
+                780px;
+            margin:
+                0 auto;}
+
+        .search-wrapper {
+            display:
+                flex;
+            align-items:
+                stretch;
+            padding:
+                7px;
+            background:
+                var(--tori-white);
+            border:
+                1px solid
+                var(--tori-gray-300);
+            border-radius:
+                12px;
+            box-shadow:
+                0 12px 35px
+                rgba(0, 0, 0, 0.08);
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;}
+        .search-wrapper:focus-within {
+            border-color:
+                var(--tori-red);
+            box-shadow:
+                0 12px 40px
+                rgba(217, 35, 46, 0.12);}
+        .search-icon {
+            display:
+                flex;
+            align-items:
+                center;
+            padding:
+                0 15px;
+            color:
+                var(--tori-gray-500);}
         .search-input {
             flex:
                 1;
@@ -336,6 +381,7 @@
                 var(--tori-red);
             background:
                 var(--tori-red-light);}
+
         /* --SECTION-- */
         .section {
             padding:
@@ -434,6 +480,7 @@
                 var(--tori-gray-500);
             font-size:
                 0.88rem;}
+
         /* --WORKFLOW CONNECTOR-- */
         .workflow {
             position:
@@ -539,409 +586,625 @@
     </style>
 </head>
 <body>
-
 <!-- ==NAVIGATION== -->
 <nav class="navbar navbar-expand-lg tori-navbar sticky-top">
     <div class="container">
-        <a class="navbar-brand tori-brand" href="#home">
-            <div class="tori-brand-mark">T</div>
-            Tori <span>Dump</span>
+        <!-- BRAND -->
+        <a
+            class="navbar-brand tori-brand"
+            href="#"
+        >
+            <div class="tori-brand-mark">
+                T
+            </div>
+            TORI <span>NETWORK</span>
         </a>
-        <button class="navbar-toggler" type="button"
-                data-toggle="collapse" data-target="#toriNavbar"
-                aria-controls="toriNavbar" aria-expanded="false"
-                aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+        <!-- MOBILE MENU BUTTON -->
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#toriNavigation"
+            aria-controls="toriNavigation"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            <i class="fas fa-bars"></i>
         </button>
-        <div class="collapse navbar-collapse" id="toriNavbar">
+       
+        <!-- NAVIGATION LINKS -->
+        <div
+            class="collapse navbar-collapse"
+            id="toriNavigation"
+        >
             <ul class="navbar-nav ml-auto align-items-lg-center">
-                <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="#steps">How It Works</a></li>
-                <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
-                <li class="nav-item"><a class="nav-link" href="#guide">Full Guide</a></li>
-                <li class="nav-item"><a class="nav-link" href="#ask-tori">Ask TORI</a></li>
+                <li class="nav-item">
+                    <a
+                        class="nav-link"
+                        href="#quick-start"
+                    >
+                        Quick Start
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a
+                        class="nav-link"
+                        href="#guide"
+                    >
+                        Full Guide
+                    </a>
+                </li>
+                <!-- LANGUAGE -->
+                <li class="nav-item">
+                    <div
+                        class="language-switcher"
+                        aria-label="Language selection"
+                    >
+                        <button
+                            type="button"
+                            class="language-btn active"
+                            data-language="en"
+                        >
+                            EN
+                        </button>
+                        <button
+                            type="button"
+                            class="language-btn"
+                            data-language="fil"
+                        >
+                            FIL
+                        </button>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
 </nav>
-
-<!-- ==HERO / HOME== -->
-<section class="hero" id="home">
+<!-- ==HERO / ASK TORI== -->
+<header class="hero">
     <div class="container">
         <div class="hero-content">
-            <span class="hero-label">Tori Network • User Guide</span>
+            <!-- LABEL -->
+            <div class="hero-label">
+                Tori Dump User Guide
+            </div>
+            <!-- MAIN TITLE -->
             <h1>
                 How can we help you
-                <span class="highlight">use Tori Dump?</span>
+                <span class="highlight">
+                    use Tori Dump?
+                </span>
             </h1>
+            <!-- DESCRIPTION -->
             <p class="hero-description">
-                Learn how Tori Dump organizes files, improves retrieval,
-                and helps make information easier to find and manage.
+                Ask a question about Tori Dump and find the
+                information you need. Learn how to upload,
+                organize, search, and retrieve your files.
             </p>
-            <div class="ask-tori" id="ask-tori">
-                <div class="search-wrapper">
+            <!-- SEARCH -->
+            <div class="ask-tori">
+                <form
+                    id="toriSearchForm"
+                    class="search-wrapper"
+                >
                     <div class="search-icon">
-                        <i class="fas fa-search" aria-hidden="true"></i>
-                    </div>
-                    <input
-                        type="text"
-                        id="searchInput"
-                        class="search-input"
-                        placeholder="Ask TORI a question..."
-                        aria-label="Ask TORI a question"
-                        autocomplete="off"
-                        onkeydown="if(event.key === 'Enter') sendMessage()">
-
-                    <button
-                        class="search-button"
-                        type="button"
-                        onclick="sendMessage()">
-                        Ask TORI
-                    </button>
-                </div>
-                <div class="suggestions">
-                    <span class="suggestions-label">Try asking:</span>
-                    <button class="suggestion-btn" onclick="askSuggestion('What is Tori Dump?')">What is Tori Dump?</button>
-                    <button class="suggestion-btn" onclick="askSuggestion('How does file routing work?')">How does file routing work?</button>
-                    <button class="suggestion-btn" onclick="askSuggestion('What metadata can be extracted?')">What metadata can be extracted?</button>
-                    <button class="suggestion-btn" onclick="askSuggestion('How does Tori support DRRM?')">How does Tori support DRRM?</button>
-                </div>
-                <div class="answer-area" id="answerArea" aria-live="polite">
-                    <div class="answer-card">
-                        <h3 id="answerHeading">TORI's Answer</h3>
-                        <div class="answer-text" id="answerText"></div>
-                        <div class="answer-sources" id="answerSources"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ==GET STARTED== -->
-<section class="section" id="steps">
-    <div class="container">
-        <div class="text-center">
-            <span class="section-label">Getting Started</span>
-        </div>
-        <h2 class="section-title text-center">Get started in four steps</h2>
-        <p class="section-description text-center">
-            A simple overview of how Tori Dump helps you organize, manage,
-            and retrieve your files.
-        </p>
-        <div class="row">
-            <div class="col-md-6 col-lg-3 mb-4">
-                <div class="step-card">
-                    <div class="step-number">01</div>
-                    <h3>Setup</h3>
-                    <p>AI context supports automated file routing.</p>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 mb-4">
-                <div class="step-card">
-                    <div class="step-number">02</div>
-                    <h3>Tori Dump</h3>
-                    <p>Two-click access reduces folder-tree hassles.</p>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 mb-4">
-                <div class="step-card">
-                    <div class="step-number">03</div>
-                    <h3>Action</h3>
-                    <p>Batch drag-and-drop triggers active ingestion.</p>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 mb-4">
-                <div class="step-card">
-                    <div class="step-number">04</div>
-                    <h3>Search</h3>
-                    <p>AI-powered query parsing improves contextual search.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- == FEATURES SECTION == -->
-<section class="section" id="features">
-    <div class="container">
-        <div class="section-heading">
-            <span class="section-label">WHAT TORI CAN DO</span>
-            <h2 class="section-title">A smarter way to work with your files</h2>
-            <p class="section-description">
-                TORI helps users locate information, understand documents,
-                and navigate the Tori workspace more efficiently.
-            </p>
-        </div>
-        <div class="row">
-            <div class="col-md-4 mb-4">
-                <div class="feature-card">
-                    <div class="feature-icon">
                         <i class="fas fa-search"></i>
                     </div>
-                    <h3>Find Information</h3>
-                    <p>
-                        Search the TORI knowledge base for guidance on
-                        Tori tools, files, metadata, and workflows.
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-folder-open"></i>
-                    </div>
-                    <h3>Understand File Workflows</h3>
-                    <p>
-                        Learn about file retrieval, folder matching,
-                        automated routing, and document organization.
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-landmark"></i>
-                    </div>
-                    <h3>Support Government Work</h3>
-                    <p>
-                        Explore knowledge related to government operations,
-                        accountability, transparency, and disaster risk
-                        reduction and management.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- == GUIDE SECTION == -->
-<section class="section guide-section" id="guide">
-    <div class="container">
-        <div class="section-heading">
-            <span class="section-label">USER GUIDE</span>
-            <h2 class="section-title">Need help using Tori?</h2>
-            <p class="section-description">
-                Follow the step-by-step guide for additional instructions
-                on navigating the Tori workspace.
-            </p>
-        </div>
-        <div class="guide-panel">
-            <div class="guide-panel-content">
-                <div class="guide-panel-icon">
-                    <i class="fas fa-book-open"></i>
-                </div>
-                <div>
-                    <h3>Explore the Tori Dump Guide</h3>
-                    <p>
-                        Review practical instructions, recommended
-                        workflows, and tips for working with Tori.
-                    </p>
-                    <a href="how-to.html" class="btn btn-primary">
-                        Open User Guide
-                        <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- == ASK TORI SECTION == -->
-<section class="section ask-section" id="ask-tori">
-    <div class="container">
-        <div class="section-heading">
-            <span class="section-label">TORI KNOWLEDGE ASSISTANT</span>
-            <h2 class="section-title">What would you like to know?</h2>
-            <p class="section-description">
-                Ask a question about TORI, its features, or the topics
-                covered by its current knowledge base.
-            </p>
-        </div>
-        <div class="tori-chat-panel">
-            <div class="chat-header">
-                <div class="chat-avatar">
-                    <i class="fas fa-robot"></i>
-                </div>
-                <div>
-                    <h3>Ask TORI</h3>
-                    <p>Knowledge assistant</p>
-                </div>
-            </div>
-            <div class="chat-body">
-                <label for="searchInput" class="sr-only">
-                    Enter your question
-                </label>
-                <div class="search-wrapper">
-                    <i class="fas fa-comment-dots search-icon"></i>
                     <input
-                        type="text"
-                        id="searchInput"
+                        id="toriSearchInput"
                         class="search-input"
-                        placeholder="e.g., How do I retrieve a file?"
+                        type="search"
+                        placeholder="Ask a question about Tori Dump..."
+                        aria-label="Ask a question about Tori Dump"
                         autocomplete="off"
                     >
                     <button
-                        type="button"
-                        class="btn btn-primary ask-button"
-                        onclick="sendMessage()"
+                        type="submit"
+                        class="search-button"
                     >
-                        Ask <i class="fas fa-paper-plane ml-1"></i>
+                        Ask Tori
+                    </button>
+                </form>
+                <!-- SEARCH RESULT WILL APPEAR HERE LATER -->
+                <div
+                    id="toriSearchResult"
+                    class="mt-3"
+                    aria-live="polite"
+                >
+                </div>
+                <!-- SUGGESTIONS -->
+                <div class="suggestions">
+                    <span class="suggestions-label">
+                        Try asking:
+                    </span>
+                    <button
+                        type="button"
+                        class="suggestion-btn"
+                        data-question="How should I name my files?"
+                    >
+                        How should I name my files?
+                    </button>
+                    <button
+                        type="button"
+                        class="suggestion-btn"
+                        data-question="How does Tori organize files?"
+                    >
+                        How does Tori organize files?
+                    </button>
+                    <button
+                        type="button"
+                        class="suggestion-btn"
+                        data-question="How do I retrieve a file?"
+                    >
+                        How do I retrieve a file?
+                    </button>
+                    <button
+                        type="button"
+                        class="suggestion-btn"
+                        data-question="Can I upload multiple files?"
+                    >
+                        Can I upload multiple files?
                     </button>
                 </div>
-                <div class="suggestion-list">
-                    <span class="suggestion-label">TRY ASKING:</span>
-                    <button type="button" class="suggestion-chip"
-                        onclick="askSuggestion('How does file retrieval work?')">
-                        File retrieval
-                    </button>
-                    <button type="button" class="suggestion-chip"
-                        onclick="askSuggestion('What is automated routing?')">
-                        Automated routing
-                    </button>
-                    <button type="button" class="suggestion-chip"
-                        onclick="askSuggestion('What is Tori Dump?')">
-                        Tori Dump
-                    </button>
-                </div>
-                <div id="answerArea" class="answer-area" hidden>
-                    <div class="answer-heading" id="answerHeading">
-                        <i class="fas fa-robot"></i>
-                        <span>TORI's response</span>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- ==QUICK START== -->
+<section
+    class="section section-light"
+    id="quick-start"
+>
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="section-label">
+                Quick Start
+            </div>
+            <h2 class="section-title">
+                Get started in four steps
+            </h2>
+            <p class="section-description mx-auto">
+                Tori Dump is designed to reduce manual file
+                management and make information easier to retrieve.
+            </p>
+        </div>
+        <div class="row workflow">
+            <!-- STEP 1 -->
+            <div class="col-md-3 mb-4">
+                <div class="quick-start-card">
+                    <div class="step-number">
+                        01
                     </div>
-                    <div id="answerText" class="answer-text"
-                        aria-live="polite"></div>
-                    <div id="answerSources" class="answer-sources"
-                        hidden></div>
+                    <h4>
+                        Set Up AI Context
+                    </h4>
+                    <p>
+                        Establish the context Tori uses to understand
+                        your project and its files.
+                    </p>
                 </div>
-                <p class="chat-disclaimer">
-                    Responses are based on TORI's locally maintained
-                    knowledge base. If a topic is not covered, TORI may
-                    be unable to provide an answer.
-                </p>
+            </div>
+            <!-- STEP 2 -->
+            <div class="col-md-3 mb-4">
+                <div class="quick-start-card">
+                    <div class="step-number">
+                        02
+                    </div>
+                    <h4>
+                        Open Tori Dump
+                    </h4>
+                    <p>
+                        Access Tori Dump from your Tori workspace
+                        without manually navigating through folder trees.
+                    </p>
+                </div>
+            </div>
+            <!-- STEP 3 -->
+            <div class="col-md-3 mb-4">
+                <div class="quick-start-card">
+                    <div class="step-number">
+                        03
+                    </div>
+                    <h4>
+                        Upload Files
+                    </h4>
+                    <p>
+                        Drag and drop individual files or batches
+                        to trigger active ingestion.
+                    </p>
+                </div>
+            </div>
+            <!-- STEP 4 -->
+            <div class="col-md-3 mb-4">
+                <div class="quick-start-card">
+                    <div class="step-number">
+                        04
+                    </div>
+                    <h4>
+                        Search & Retrieve
+                    </h4>
+                    <p>
+                        Use contextual search and AI-powered retrieval
+                        to find relevant files.
+                    </p>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- == FOOTER == -->
-<footer class="site-footer">
+<!-- ===FULL GUIDE== -->
+<section
+    class="section"
+    id="guide">
     <div class="container">
-        <div class="footer-content">
-            <div>
-                <h3>TORI Dump Guide</h3>
-                <p>
-                    A practical guide to navigating the Tori workspace
-                    and its knowledge resources.
-                </p>
+        <div class="mb-5">
+            <div class="section-label">
+                Explore
             </div>
-            <div class="footer-links">
-                <a href="#home">Home</a>
-                <a href="#features">Features</a>
-                <a href="#guide">User Guide</a>
-                <a href="how-to.html">How-To Instructions</a>
+            <h2 class="section-title">
+                Tori Dump Full Guide
+            </h2>
+            <p class="section-description">
+                Explore each topic to learn how Tori Dump handles
+                file naming, uploading, organization, indexing,
+                and retrieval.
+            </p>
+        </div>
+        <!-- GUIDE CONTENT WILL BE BUILT NEXT -->
+        <div class="guide-preview">
+            <div class="guide-item">
+                <i class="fas fa-info-circle"></i>
+                What is Tori Dump?
+            </div>
+            <div class="guide-item">
+                <i class="fas fa-file-signature"></i>
+                How should I name my files?
+            </div>
+            <div class="guide-item">
+                <i class="fas fa-cloud-upload-alt"></i>
+                How do I upload files?
+            </div>
+            <div class="guide-item">
+                <i class="fas fa-folder-open"></i>
+                How does Tori organize files?
+            </div>
+            <div class="guide-item">
+                <i class="fas fa-search"></i>
+                How does AI-powered retrieval work?
+            </div>
+            <div class="guide-item">
+                <i class="fas fa-building"></i>
+                Tori Dump for government work
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 TORI Dump Guide. For informational purposes.</p>
+    </div>
+</section>
+
+<!-- ==FOOTER== -->
+<footer class="footer">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <div class="footer-brand">
+                    TORI <span>NETWORK</span>
+                </div>
+                <small>
+                    Tori Dump · Interactive User Guide
+                </small>
+            </div>
+            <div class="col-md-6 text-md-right mt-3 mt-md-0">
+                <small>
+                    Built for Tori Workspace users
+                </small>
+            </div>
         </div>
     </div>
 </footer>
 
-<!-- == JAVASCRIPT DEPENDENCIES == -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- ==JAVASCRIPT LIBRARIES== -->
+<script
+    src="https://code.jquery.com/jquery-3.5.1.slim.min.js">
+</script>
+<script
+    src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js">
+</script>
+<script
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+</script>
+<!-- ===TORI GUIDE JAVASCRIPT== -->
 
-<!-- Load the existing knowledge base BEFORE the search functions -->
-<script src="knowledge.js"></script>
-
-<!-- == TORI INTERACTION == -->
 <script>
-    function sendMessage() {
-        const input = document.getElementById("searchInput");
-        const question = input.value.trim();
+    /*==SUGGESTION BUTTONS==*/
+    const searchInput =
+        document.getElementById("toriSearchInput");
+    const suggestionButtons =
+        document.querySelectorAll(".suggestion-btn");
+    suggestionButtons.forEach(function(button) {
+        button.addEventListener("click", function() {
+            const question =
+                button.getAttribute("data-question");
+            searchInput.value =
+                question;
+            searchInput.focus();
+        });
+    });
+
+    /*==SEARCH FORM / TORI KNOWLEDGE ENGINE==*/
+    const searchForm =
+        document.getElementById("toriSearchForm");
+    const searchResult =
+        document.getElementById("toriSearchResult");
+    searchForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        const question =
+            searchInput.value.trim();
         if (!question) {
-            input.focus();
+            searchInput.focus();
             return;
         }
-        displayToriAnswer(question);
-    }
-    function askSuggestion(question) {
-        document.getElementById("searchInput").value = question;
-        displayToriAnswer(question);
-    }
-    function displayToriAnswer(question) {
-        const answerArea = document.getElementById("answerArea");
-        const answerText = document.getElementById("answerText");
-        const answerSources = document.getElementById("answerSources");
-        const answerHeading = document.getElementById("answerHeading");
-        answerArea.hidden = false;
-        answerSources.hidden = true;
-        answerSources.textContent = "";
-        answerText.textContent = "Searching TORI's knowledge base...";
-        answerArea.scrollIntoView({
-            behavior: "smooth",
-            block: "nearest"
-        });
-        try {
-            if (typeof generateToriAnswer !== "function") {
-                answerText.textContent =
-                    "The TORI knowledge engine could not be loaded. " +
-                    "Please check that knowledge.js exists in the same " +
-                    "repository as index.html.";
+        // Show thinking state
+        searchResult.innerHTML = `
+            <div
+                class="alert alert-light border text-left"
+                role="status"
+            >
+                <strong>
+                    TORI
+                </strong>
+                <br>
+                <span class="text-muted">
+                    Searching my knowledge...
+                </span>
+            </div>
+        `;
+        // Small delay for natural interaction
+        setTimeout(function() {
+            const result =
+                generateToriAnswer(question);
+            if (!result.found) {
+                searchResult.innerHTML = `
+                    <div
+                        class="alert alert-light border text-left"
+                        role="status"
+                    >
+                        <strong>
+                            TORI
+                        </strong>
+                        <p class="mb-0 mt-2">
+                            ${result.answer}
+                        </p>
+                    </div>
+                `;
                 return;
             }
-            const result = generateToriAnswer(question);
-            if (!result || typeof result !== "object") {
-                answerText.textContent =
-                    "TORI could not process this question. Please try " +
-                    "rephrasing it.";
-                return;
-            }
-            answerHeading.textContent = result.found
-                ? "TORI's response"
-                : "No matching information found";
-            answerText.textContent = result.answer ||
-                "No answer was returned. Please try another question.";
-            if (Array.isArray(result.sources) && result.sources.length) {
-                answerSources.hidden = false;
-                const sourceTitle = document.createElement("strong");
-                sourceTitle.textContent = "Related knowledge topics:";
-                answerSources.appendChild(sourceTitle);
-                const sourceList = document.createElement("ul");
-                result.sources.forEach(function(source) {
-                    const item = document.createElement("li");
-                    if (typeof source === "string") {
-                        item.textContent = source;
-                    } else if (source && typeof source === "object") {
-                        item.textContent =
-                            source.title || source.name || source.id ||
-                            JSON.stringify(source);
-                    } else {
-                        item.textContent = String(source);
-                    }
-                    sourceList.appendChild(item);
-                });
-                answerSources.appendChild(sourceList);
-            }
-        } catch (error) {
-            console.error("TORI response error:", error);
-            answerText.textContent =
-                "Something went wrong while processing your question. " +
-                "Please check the browser console and the knowledge.js file.";
-        }
-    }
-    document.addEventListener("DOMContentLoaded", function() {
-        const input = document.getElementById("searchInput");
-        if (input) {
-            input.addEventListener("keydown", function(event) {
-                if (event.key === "Enter") {
-                    event.preventDefault();
-                    sendMessage();
-                }
+            const sources =
+                result.sources
+                    .map(function(source) {
+                        return `<li>${source}</li>`;
+                    })
+                    .join("");
+            searchResult.innerHTML = `
+                <div
+                    class="alert alert-light border text-left"
+                    role="status"
+                >
+                    <strong>
+                        TORI
+                    </strong>
+                    <p class="mt-2 mb-2">
+                        ${formatToriAnswer(result.answer)}
+                    </p>
+                    <hr>
+                    <small class="text-muted">
+                        <strong>Knowledge sources:</strong>
+                    </small>
+                    <ul class="mb-0 mt-1">
+                        ${sources}
+                    </ul>
+                </div>
+            `;
+        }, 400);
+    });
+    /*==FORMAT TORI ANSWER==*/
+    function formatToriAnswer(text) {
+        return text
+            .trim()
+            .replace(/\n\n/g, "<br><br>")
+            .replace(/\n/g, "<br>");    }
+    /*==LANGUAGE SWITCHER==
+     * The full English / Filipino translation
+     * system will be added after the page
+     * structure is complete.
+     */
+    const languageButtons =
+        document.querySelectorAll(".language-btn");
+    languageButtons.forEach(function(button) {
+        button.addEventListener("click", function() {
+            languageButtons.forEach(function(btn) {
+                btn.classList.remove("active");
             });
-        }
+            button.classList.add("active");
+        });
     });
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    // =TORI — BASIC CHAT ENGINE=// 
+    const chatInput = document.getElementById("chat-input");
+    const sendButton = document.getElementById("send-button");
+    const chatContainer = document.getElementById("chat-container");
+    const clearButton = document.getElementById("clear-button");
+    //-SAFETY CHECK-//
+    if (!chatInput || !sendButton || !chatContainer) {
+        console.error("TORI: Required chat elements were not found.");
+        return;}
+    // -SEND MESSAGE -//
+    function sendMessage() {
+        const message = chatInput.value.trim();
+        if (!message) return;
+        // Display user's message
+        addMessage(message, "user");
+        // Clear input
+        chatInput.value = "";
+        // Show TORI thinking state
+        const thinkingMessage = addMessage(
+            "TORI is thinking...",
+            "tori thinking");
+        // Small delay to make the interaction feel natural
+        setTimeout(() => {
+            thinkingMessage.remove();
+            const response = getToriResponse(message);
+            addMessage(response, "tori");}, 700);}
+    // -ADD MESSAGE TO CHAT -//
+    function addMessage(message, sender) {
+        const messageElement = document.createElement("div");
+        messageElement.className = `message ${sender}`;
+        messageElement.textContent = message;
+        chatContainer.appendChild(messageElement);
+        // Automatically scroll to newest message
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+        return messageElement;}
+    // = TORI CONVERSATION CONTEXT = //
+    let toriConversation = {
+        history: [],
+        lastQuestion: "",
+        lastTopic: "",
+        lastSources: []
+    };
+    // = TORI CONTEXT HELPER = //
+    function updateToriContext(question, result) {
+        toriConversation.lastQuestion = question;
+        if (result && result.sources && result.sources.length > 0) {
+            toriConversation.lastSources = result.sources;
+            toriConversation.lastTopic = result.sources[0];}
+        toriConversation.history.push({
+            user: question,
+            topic: toriConversation.lastTopic,
+            sources: result && result.sources
+                ? result.sources
+                : []
+        });
+        // - Keep only the most recent 10 exchanges - //
+        if (toriConversation.history.length > 10) {
+            toriConversation.history.shift();
+        }
+    }
+    // = TORI CONVERSATION CONTEXT = //
+    let toriConversation = {
+        history: [],
+        lastQuestion: "",
+        lastTopic: "",
+        lastSources: []
+    };
+    // = TORI CONTEXT HELPER = //
+    function updateToriContext(question, result) {
+        toriConversation.lastQuestion = question;
+        if (result && result.sources && result.sources.length > 0) {
+            toriConversation.lastSources = result.sources;
+            toriConversation.lastTopic = result.sources[0];}
+        toriConversation.history.push({
+            user: question,
+            topic: toriConversation.lastTopic,
+            sources: result && result.sources
+                ? result.sources
+                : []
+        });
+        // Keep only the most recent 10 exchanges
+        if (toriConversation.history.length > 10) {
+            toriConversation.history.shift();
+        }
+    }
+    // -TORI KNOWLEDGE RESPONSE ENGINE-//
+    function getToriResponse(message) {
+        const input = message.toLowerCase().trim();
+        // = BASIC GREETINGS = //
+        if (
+            input === "hi" ||
+            input === "hello" ||
+            input === "hey" ||
+            input.startsWith("hi ") ||
+            input.startsWith("hello ")
+        ) {
+            return "Hello! I'm TORI. How can I help you?";
+        }
+        // =CLEAR CHAT=//
+        if (
+            input === "clear" ||
+            input === "clear chat"
+        ) {
+            clearChat();
+            // -Reset TORI's conversation context- //
+            toriConversation = {
+                history: [],
+                lastQuestion: "",
+                lastTopic: "",
+                lastSources: []
+            };
+            return "";
+        }
+        // =DETECT FOLLOW-UP QUESTION= //
+        const isFollowUp = isToriFollowUp(message);
+        // =SEARCH TORI KNOWLEDGE BASE= //
+        let searchQuery = message;
+        // If this is a follow-up and TORI has a previous topic, include that topic in the search query. //
+        if (
+            isFollowUp &&
+            toriConversation.lastTopic
+        ) {
+            searchQuery =
+                toriConversation.lastTopic + " " + message;
+        }
+        const result = generateToriAnswer(searchQuery);
+        // =NO KNOWLEDGE FOUND= //
+        if (!result.found) {
+            updateToriContext(message, result);
+            return result.answer;
+        }
+        // =UPDATE CONVERSATION CONTEXT= //
+        updateToriContext(message, result);
+        // =RETURN KNOWLEDGE ANSWER= //
+        let response = result.answer;
+        // -Add knowledge sources- //
+        if (
+            result.sources &&
+            result.sources.length > 0
+        ) {
+            response +=
+                "\n\nKnowledge sources: " +
+                result.sources.join(", ");
+        }
+        return response;
+    }
+    // -CLEAR CHAT -// 
+    function clearChat() {
+        chatContainer.innerHTML = "";
+        addMessage(
+            "Conversation cleared. How can I help?",
+            "tori"
+        );}
+    // -BUTTON CLICK-//
+    sendButton.addEventListener("click", sendMessage);
+    // -ENTER KEY- //
+    chatInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            sendMessage();
+        }
+    });
+    //- CLEAR BUTTON-// 
+    if (clearButton) {
+        clearButton.addEventListener("click", clearChat);}
+    // -INITIAL TORI MESSAGE- // 
+    if (chatContainer.children.length === 0) {
+        addMessage(
+            "Hello! I'm TORI. How can I help you?",
+            "tori"
+        );
+    }
+});
+</script>
+<script src="knowledge.js"></script>
 </body>
 </html>
