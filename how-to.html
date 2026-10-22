@@ -1026,6 +1026,16 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a
+                        class="nav-link"
+                        href="#faqs"
+                        data-en="FAQs"
+                        data-fil="FAQs"
+                    >
+                        FAQs
+                    </a>
+                </li>
+                <li class="nav-item">
                    <a class="nav-link"
                        href="#faqs"
                        data-en="FAQs"
@@ -2091,6 +2101,17 @@
         </div>
     </div>
 </section>
+<!-- ==BACK TO TOP BUTTON== -->
+<button
+    type="button"
+    id="backToTop"
+    class="back-to-top"
+    aria-label="Back to top"
+    title="Back to top"
+>
+    <i class="fas fa-arrow-up"></i>
+</button>
+ 
 <!-- =FAQ= -->
 <section
     class="section section-light"
@@ -2501,6 +2522,22 @@
 <script src="knowledge.js"></script>
 <!-- =TORI GUIDE JAVASCRIPT= -->
 <script>
+    /*==BACK TO TOP BUTTON==*/
+    const backToTopButton =
+        document.getElementById("backToTop");
+    window.addEventListener("scroll", function () {
+        if (window.scrollY > 300) {
+            backToTopButton.classList.add("visible");
+        } else {
+            backToTopButton.classList.remove("visible");
+        }
+    });
+    backToTopButton.addEventListener("click", function () {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
     /* =LANGUAGE SYSTEM= */
     let currentLanguage = "en";
 
