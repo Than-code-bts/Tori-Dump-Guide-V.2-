@@ -2522,281 +2522,236 @@
 <script src="knowledge.js"></script>
 <!-- =TORI GUIDE JAVASCRIPT= -->
 <script>
-    /*==BACK TO TOP BUTTON==*/
-    const backToTopButton =
-        document.getElementById("backToTop");
-    window.addEventListener("scroll", function () {
-        if (window.scrollY > 300) {
-            backToTopButton.classList.add("visible");
-        } else {
-            backToTopButton.classList.remove("visible");
+
+<!-- =TORI GUIDE JAVASCRIPT= -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    /* BACK TO TOP */
+    const backToTopButton = document.getElementById("backToTop");
+
+    if (backToTopButton) {
+        function updateBackToTopVisibility() {
+            backToTopButton.classList.toggle(
+                "is-visible",
+                window.scrollY > 300
+            );
         }
-    });
-    backToTopButton.addEventListener("click", function () {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
+
+        window.addEventListener("scroll", updateBackToTopVisibility);
+
+        backToTopButton.addEventListener("click", function () {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
         });
-    });
-    /* =LANGUAGE SYSTEM= */
+
+        updateBackToTopVisibility();
+    }
+
+    /* LANGUAGE SWITCHER */
     let currentLanguage = "en";
 
     function setLanguage(language) {
-        currentLanguage = language;
-        document.documentElement.lang =
-            language === "fil"
-                ? "fil"
-                : "en";
-        /* -Translate all elements with data-en/data-fil- */
-        const translatableElements =
-            document.querySelectorAll(
-                "[data-en][data-fil]"
+        currentLanguage = language === "fil" ? "fil" : "en";
+
+        document.documentElement.lang = currentLanguage;
+
+        document.querySelectorAll("[data-en][data-fil]").forEach(function (element) {
+            // Do not destroy nested HTML or icons.
+            if (element.children.length > 0) return;
+
+            const translation = element.getAttribute(
+                currentLanguage === "fil" ? "data-fil" : "data-en"
             );
-        translatableElements.forEach(function(element) {
-            const translation =
-                element.getAttribute(
-                    language === "fil"
-                        ? "data-fil"
-                        : "data-en"
-                );
+
             if (translation !== null) {
-                element.textContent =
-                    translation;
+                element.textContent = translation;
             }
         });
-        /* -Update language buttons- */
-        document
-            .querySelectorAll(".language-btn")
-            .forEach(function(button) {
 
-                button.classList.remove("active");
+        document.querySelectorAll(".language-btn").forEach(function (button) {
+            const isActive =
+                button.getAttribute("data-language") === currentLanguage;
 
-            });
-        const activeButton =
-            document.querySelector(
-                `.language-btn[data-language="${language}"]`
-            );
-        if (activeButton) {
-            activeButton.classList.add("active");
-        }
-        /* -Search placeholder- */
-        const searchInput =
-            document.getElementById(
-                "toriSearchInput"
-            );
+            button.classList.toggle("active", isActive);
+            button.setAttribute("aria-pressed", String(isActive));
+        });
+
+        const searchInput = document.getElementById("toriSearchInput");
+
         if (searchInput) {
-            searchInput.placeholder =
-                language === "fil"
-                    ? "Magtanong tungkol sa Tori Dump..."
-                    : "Ask a question about Tori Dump...";
+            searchInput.placeholder = currentLanguage === "fil"
+                ? "Magtanong tungkol sa Tori Dump..."
+                : "Ask a question about Tori Dump...";
 
-        }
-        /* -Search aria label- */
-        if (searchInput) {
             searchInput.setAttribute(
                 "aria-label",
-                language === "fil"
+                currentLanguage === "fil"
                     ? "Magtanong tungkol sa Tori Dump"
                     : "Ask a question about Tori Dump"
             );
         }
-        /* -Save language preference- */
+
         try {
-            localStorage.setItem(
-                "toriGuideLanguage",
-                language
-            );
+            localStorage.setItem("toriGuideLanguage", currentLanguage);
         } catch (error) {
-            /* Ignore storage errors */
+            // Continue if browser storage is unavailable.
         }
     }
-    /* =LANGUAGE BUTTONS= */
-    document
-        .querySelectorAll(".language-btn")
-        .forEach(function(button) {
-            button.addEventListener(
-                "click",
-                function() {
-                    setLanguage(
-                        button.getAttribute(
-                            "data-language"
-                        )
-                    );
-                }
-            );
+
+    document.querySelectorAll(".language-btn").forEach(function (button) {
+        button.addEventListener("click", function () {
+            setLanguage(button.getAttribute("data-language"));
         });
-    /* =SUGGESTION BUTTONS= */
-    const searchInput =
-        document.getElementById(
-            "toriSearchInput"
-        );
-    const suggestionButtons =
-        document.querySelectorAll(
-            ".suggestion-btn"
-        );
-    suggestionButtons.forEach(
-        function(button) {
-            button.addEventListener(
-                "click",
-                function() {
-                    const question =
-                        button.getAttribute(
-                            "data-question"
-                        );
-                    searchInput.value =
-                        question;
-                    searchInput.focus();
-                }
-            );
-        }
-    );
-    /* =SEARCH FORM= */
-    const searchForm =
-        document.getElementById(
-            "toriSearchForm"
-        );
-    const searchResult =
-        document.getElementById(
-            "toriSearchResult"
-        );
-    searchForm.addEventListener(
-        "submit",
-        function(event) {
+    });
+
+    /* LOAD SAVED LANGUAGE */
+    let savedLanguage = "en";
+
+    try {
+        savedLanguage = localStorage.getItem("toriGuideLanguage") || "en";
+    } catch (error) {
+        // Use English by default.
+    }
+
+    setLanguage(savedLanguage);
+
+    /* SUGGESTION BUTTONS */
+    const searchInput = document.getElementById("toriSearchInput");
+
+    document.querySelectorAll(".suggestion-btn").forEach(function (button) {
+        button.addEventListener("click", function () {
+            if (!searchInput) return;
+
+            const question = button.getAttribute("data-question");
+            searchInput.value = question || "";
+            searchInput.focus();
+        });
+    });
+
+    /* SEARCH FORM */
+    const searchForm = document.getElementById("toriSearchForm");
+    const searchResult = document.getElementById("toriSearchResult");
+
+    if (searchForm && searchInput && searchResult) {
+        searchForm.addEventListener("submit", function (event) {
             event.preventDefault();
-            const question =
-                searchInput.value.trim();
+
+            const question = searchInput.value.trim();
             if (!question) {
                 searchInput.focus();
                 return;
             }
-            /* -THINKING STATE- */
+
             searchResult.innerHTML = `
                 <div class="tori-answer">
-                    <div class="tori-answer-label">
-                        TORI
-                    </div>
+                    <div class="tori-answer-label">TORI</div>
                     <p class="mb-0 text-muted">
-                        ${
-                            currentLanguage === "fil"
-                                ? "Hinahanap sa knowledge base..."
-                                : "Searching my knowledge..."
-                        }
+                        ${currentLanguage === "fil"
+                            ? "Hinahanap sa knowledge base..."
+                            : "Searching my knowledge..."}
                     </p>
                 </div>
             `;
-            /* -SMALL DELAY- */
-            setTimeout(
-                function() {
-                    const result =
-                        generateToriAnswer(
-                            question
-                        );
-                    /* -NO RESULT- */
-                    if (!result.found) {
-                        searchResult.innerHTML = `
-                            <div class="tori-answer">
-                                <div class="tori-answer-label">
-                                    TORI
-                                </div>
-                                <p>
-                                    ${result.answer}
-                                </p>
-                            </div>
-                        `;
-                        return;
-                    }
-                    /* -SOURCES- */
-                    const sources =
-                        result.sources
-                            .map(
-                                function(source) {
-                                    return `
-                                        <li>
-                                            ${source}
-                                        </li>
-                                    `;
-                                }
-                            )
-                            .join("");
-                    /* -RESULT- */
+
+            setTimeout(function () {
+                if (typeof generateToriAnswer !== "function") {
                     searchResult.innerHTML = `
                         <div class="tori-answer">
-                            <div class="tori-answer-label">
-                                TORI
-                            </div>
-                            <div>
-                                ${formatToriAnswer(
-                                    result.answer
-                                )}
-                            </div>
-                            <hr>
-                            <small class="text-muted">
-                                <strong>
-                                    ${
-                                        currentLanguage === "fil"
-                                            ? "Knowledge sources:"
-                                            : "Knowledge sources:"
-                                    }
-                                </strong>
-                            </small>
-                            <ul class="mb-0 mt-1">
-                                ${sources}
-                            </ul>
+                            <div class="tori-answer-label">TORI</div>
+                            <p>Sorry, the knowledge base could not be loaded. Please try refreshing the page.</p>
                         </div>
                     `;
-                },
-                400
-            );
-        }
-    );
-    /* =FORMAT TORI ANSWER= */
-    function formatToriAnswer(text) {
-        return text
-            .trim()
-            .replace(
-                /\n\n/g,
-                "<br><br>"
-            )
-            .replace(
-                /\n/g,
-                "<br>"
-            );
-    }
-    /* =LOAD SAVED LANGUAGE= */
-    document.addEventListener(
-        "DOMContentLoaded",
-        function() {
-            let savedLanguage = "en";
-            try {
-                savedLanguage =
-                    localStorage.getItem(
-                        "toriGuideLanguage"
-                    ) || "en";
-            } catch (error) {
-                savedLanguage = "en";
-            }
-            setLanguage(
-                savedLanguage
-            );
-        }
-        /* =BACKTOTOP= */
-        const backToTop = document.getElementById("backToTop");
-        if (backToTop) {
-            window.addEventListener("scroll", function () {
-                if (window.scrollY > 300) {
-                    backToTop.classList.add("is-visible");
-                } else {
-                    backToTop.classList.remove("is-visible");
+                    return;
                 }
-            });
-            backToTop.addEventListener("click", function () {
-                window.scrollTo({
-                    top: 0,
-                    behavior: "smooth"
-                });
-            });
-        }
-    );
+
+                const result = generateToriAnswer(question);
+
+                if (!result || !result.found) {
+                    const message = result && result.answer
+                        ? result.answer
+                        : "I couldn't find a relevant answer in the knowledge base.";
+
+                    const paragraph = document.createElement("p");
+                    paragraph.textContent = message;
+
+                    const answerBox = document.createElement("div");
+                    answerBox.className = "tori-answer";
+
+                    const label = document.createElement("div");
+                    label.className = "tori-answer-label";
+                    label.textContent = "TORI";
+
+                    answerBox.appendChild(label);
+                    answerBox.appendChild(paragraph);
+                    searchResult.replaceChildren(answerBox);
+                    return;
+                }
+
+                const answerBox = document.createElement("div");
+                answerBox.className = "tori-answer";
+
+                const label = document.createElement("div");
+                label.className = "tori-answer-label";
+                label.textContent = "TORI";
+                answerBox.appendChild(label);
+
+                const answer = document.createElement("div");
+                answer.innerHTML = formatToriAnswer(result.answer || "");
+                answerBox.appendChild(answer);
+
+                if (Array.isArray(result.sources) && result.sources.length) {
+                    const divider = document.createElement("hr");
+                    answerBox.appendChild(divider);
+
+                    const sourceHeading = document.createElement("small");
+                    sourceHeading.className = "text-muted";
+                    sourceHeading.innerHTML = "<strong>Knowledge sources:</strong>";
+                    answerBox.appendChild(sourceHeading);
+
+                    const sourceList = document.createElement("ul");
+                    sourceList.className = "mb-0 mt-1";
+
+                    result.sources.forEach(function (source) {
+                        const item = document.createElement("li");
+                        item.textContent = source;
+                        sourceList.appendChild(item);
+                    });
+
+                    answerBox.appendChild(sourceList);
+                }
+
+                searchResult.replaceChildren(answerBox);
+            }, 200);
+        });
+    }
+
+    /* FORMAT ANSWER */
+    function formatToriAnswer(text) {
+        return String(text)
+            .trim()
+            .split(/\n\n/)
+            .map(function (paragraph) {
+                return paragraph
+                    .split("\n")
+                    .map(function (line) {
+                        return escapeHtml(line);
+                    })
+                    .join("<br>");
+            })
+            .join("<br><br>");
+    }
+
+    function escapeHtml(text) {
+        return String(text)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+});
 </script>
 </body>
 </html>
