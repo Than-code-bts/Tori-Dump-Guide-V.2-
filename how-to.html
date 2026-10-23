@@ -1463,6 +1463,36 @@
                 var(--tori-red);
         }
 
+        /* =BACK TO THE TOP= */
+        .back-to-top {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 9999;
+            display: none;
+            background-color: #c62828;
+            color: #ffffff;
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .back-to-top.is-visible {
+            display: block;
+        }
+        
+        .back-to-top:hover {
+            background-color: #a61b1b;
+        }
+        
+        .back-to-top:focus {
+            outline: 2px solid #ffffff;
+            outline-offset: 3px;
+        }
 
         /* =====================================================
            MOBILE
@@ -1534,6 +1564,8 @@
                 font-size:
                     2.35rem;
             }
+    
+
         }
 
     </style>
@@ -4207,8 +4239,39 @@
             setLanguage(
                 savedLanguage
             );
+            // Back to Top button
+            const backToTopButton = document.getElementById("backToTop");
+        
+            if (backToTopButton) {
+                function updateBackToTopVisibility() {
+                    backToTopButton.classList.toggle(
+                        "is-visible",
+                        window.scrollY > 300
+                    );
+                }
+        
+                window.addEventListener("scroll", updateBackToTopVisibility);
+        
+                backToTopButton.addEventListener("click", function () {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: "smooth"
+                    });
+                });
+            updateBackToTopVisibility();
         }
-    );
+    }
+);
 </script>
+
+<button
+    id="backToTop"
+    class="back-to-top"
+    type="button"
+    aria-label="Back to top"
+    title="Back to top">
+    ↑
+</button>
+
 </body>
 </html>
